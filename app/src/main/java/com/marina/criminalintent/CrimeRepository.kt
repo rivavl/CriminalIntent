@@ -11,12 +11,11 @@ private const val DATABASE_NAME = "crime-database"
 
 class CrimeRepository private constructor(context: Context) {
 
-    private val database: CrimeDatabase = Room.databaseBuilder(
+    private val database : CrimeDatabase = Room.databaseBuilder(
         context.applicationContext,
         CrimeDatabase::class.java,
         DATABASE_NAME
     ).build()
-
     private val crimeDao = database.crimeDao()
     private val executor = Executors.newSingleThreadExecutor()
 
@@ -46,7 +45,8 @@ class CrimeRepository private constructor(context: Context) {
         }
 
         fun get(): CrimeRepository {
-            return INSTANCE ?: throw IllegalStateException("CrimeRepository must be initialized")
+            return INSTANCE ?:
+            throw IllegalStateException("CrimeRepository must be initialized")
         }
     }
 }
